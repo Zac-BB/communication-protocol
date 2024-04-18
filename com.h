@@ -54,24 +54,7 @@ struct pose{
         // std::cout << "( " << (int)getI() << " , " << (int)getJ() << " )" << std::endl;
     }
 };
-class node {
-    
-    public:
-        uint8_t val = 0x00;
-        node(uint8_t in);
-        node(bool hasNorth, bool hasEast, bool hasSouth, bool hasWest);
-        node();
-        void setDir(bool wall, uint8_t dir);
-        void adjacentSet(bool wall,uint8_t dir);
-        bool getDir(uint8_t dir);
-        void setFeature(uint8_t face);
-        bool getFeature(uint8_t& face);
-        bool explored();
-        operator uint8_t() {
-            return val;
-        }
 
-};
 
 struct nav {
     // priority(0000) turn(000) drive(0)
