@@ -56,24 +56,6 @@ struct pose{
         // std::cout << "( " << (int)getI() << " , " << (int)getJ() << " )" << std::endl;
     }
 };
-class node {
-    
-    public:
-        uint8_t val = 0x00;
-        node(uint8_t in);
-        node(bool hasNorth, bool hasEast, bool hasSouth, bool hasWest);
-        node();
-        void setDir(bool wall, uint8_t dir);
-        void adjacentSet(bool wall,uint8_t dir);
-        bool getDir(uint8_t dir);
-        void setFeature(uint8_t face);
-        bool getFeature(uint8_t& face);
-        bool explored();
-        operator uint8_t() {
-            return val;
-        }
-
-};
 
 struct nav {
     // priority(0000) turn(000) drive(0)
@@ -106,15 +88,15 @@ struct nav {
 
 struct mapData {
     // 00 is i 000 is J 00 is theta 0 is wall
-    uint8_t data;
-    pose(uint8_t i, uint8_t j, uint8_t t,uint8_t wall) {
+    uint8_t data = 0x00;
+    mapData( uint8_t i, uint8_t j, uint8_t t,uint8_t wall) {
         data = (i << 6) | (j << 3) | (t << 1) | wall;
     }
-    pose() {
-        Pose = 0x00;
+    mapData(void) {
+        data = 0x00;
     }
-    pose(uint8_t casted) {
-        Pose = casted;
+    mapData(uint8_t casted) {
+        data = casted;
     }
     uint8_t getI() {
 
