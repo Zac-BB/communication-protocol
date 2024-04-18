@@ -101,3 +101,60 @@ struct nav {
         return data;
     }
 };
+
+struct mapData {
+    // 00 is i 000 is J 00 is theta 0 is wall
+    uint8_t data;
+    pose(uint8_t i, uint8_t j, uint8_t t,uint8_t wall) {
+        data = (i << 6) | (j << 3) | (t << 1) | wall;
+    }
+    pose() {
+        Pose = 0x00;
+    }
+    pose(uint8_t casted) {
+        Pose = casted;
+    }
+    uint8_t getI() {
+
+        return (Pose >> 6) & 0x03;
+    }
+    void setI(uint8_t i){
+        Pose &= 0x3f;
+        Pose |= (i << 6);
+    }
+    uint8_t getJ() {
+        return (Pose >> 3) & 0x07;
+    }
+    void setJ(uint8_t j){
+        Pose &= 0xc7;
+        Pose |= (j << 3);
+    }
+    uint8_t getT() {
+        return (Pose >> 1) & 0x03;
+    }
+    void setT(uint8_t t){
+        Pose &= 0xf9;
+        Pose |= (t << 1);
+    }
+    uint8_t getWall() {
+        return (Pose ) & 0x01;
+    }
+    void setT(uint8_t wall){
+        Pose &= 0xfe;
+        Pose |= (t & 0x01);
+    }
+    bool cordsMatch(pose& b) {
+        return getI() == b.getI() && getJ() == b.getJ();
+    }
+    
+    operator uint8_t() {
+        return Pose;
+    }
+    bool operator == (const pose& comp) {
+        return (Pose & 0xf8) == (comp.Pose & 0xf8);
+    }
+    bool operator == (const uint8_t& comp) {
+        return (Pose & 0xf8) == (comp & 0xf8);
+    }
+   
+};
