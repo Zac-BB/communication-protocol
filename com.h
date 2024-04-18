@@ -1,12 +1,12 @@
 #pragma once
 
-
+#define affirm "/r"
 #define requestNavData "esp/nav"// : 
 #define sendNavData "romi/nav"// : nav
-#define affirmNavData "esp/nav//received"// : bool
+// #define affirmNavData "esp/nav/r"// : bool
 
 
 #define sendMapData "esp/map"// : nav
-#define affirmNavData "romi/map//received"// : bool
+// #define affirmMapData "romi/map/r"// : bool
 
-
+#define collisionDetected "esp/col"//:
