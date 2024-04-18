@@ -1,3 +1,5 @@
+#pragma once
+
 struct pose{
     // 00 is i 000 is J 000 is theta
     uint8_t Pose;
@@ -54,7 +56,24 @@ struct pose{
         // std::cout << "( " << (int)getI() << " , " << (int)getJ() << " )" << std::endl;
     }
 };
+class node {
+    
+    public:
+        uint8_t val = 0x00;
+        node(uint8_t in);
+        node(bool hasNorth, bool hasEast, bool hasSouth, bool hasWest);
+        node();
+        void setDir(bool wall, uint8_t dir);
+        void adjacentSet(bool wall,uint8_t dir);
+        bool getDir(uint8_t dir);
+        void setFeature(uint8_t face);
+        bool getFeature(uint8_t& face);
+        bool explored();
+        operator uint8_t() {
+            return val;
+        }
 
+};
 
 struct nav {
     // priority(0000) turn(000) drive(0)
@@ -99,45 +118,45 @@ struct mapData {
     }
     uint8_t getI() {
 
-        return (Pose >> 6) & 0x03;
+        return (data >> 6) & 0x03;
     }
     void setI(uint8_t i){
-        Pose &= 0x3f;
-        Pose |= (i << 6);
+        data &= 0x3f;
+        data |= (i << 6);
     }
     uint8_t getJ() {
-        return (Pose >> 3) & 0x07;
+        return (data >> 3) & 0x07;
     }
     void setJ(uint8_t j){
-        Pose &= 0xc7;
-        Pose |= (j << 3);
+        data &= 0xc7;
+        data |= (j << 3);
     }
     uint8_t getT() {
-        return (Pose >> 1) & 0x03;
+        return (data >> 1) & 0x03;
     }
     void setT(uint8_t t){
-        Pose &= 0xf9;
-        Pose |= (t << 1);
+        data &= 0xf9;
+        data |= (t << 1);
     }
     uint8_t getWall() {
-        return (Pose ) & 0x01;
+        return (data ) & 0x01;
     }
-    void setT(uint8_t wall){
-        Pose &= 0xfe;
-        Pose |= (t & 0x01);
+    void setWall(uint8_t wall){
+        data &= 0xfe;
+        data |= (wall & 0x01);
     }
-    bool cordsMatch(pose& b) {
+    bool cordsMatch(mapData& b) {
         return getI() == b.getI() && getJ() == b.getJ();
     }
     
     operator uint8_t() {
-        return Pose;
+        return data;
     }
-    bool operator == (const pose& comp) {
-        return (Pose & 0xf8) == (comp.Pose & 0xf8);
+    bool operator == (const mapData& comp) {
+        return (data & 0xf8) == (comp.data & 0xf8);
     }
     bool operator == (const uint8_t& comp) {
-        return (Pose & 0xf8) == (comp & 0xf8);
+        return (data & 0xf8) == (comp & 0xf8);
     }
    
 };
