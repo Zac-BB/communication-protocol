@@ -150,13 +150,13 @@ struct featureData{
     // ramp i [00] j[000] t[00] Type[~0~]
     // button i [00] j[000] t[00] Type[~1~]
     uint8_t data = 0x00;
-    mapData( uint8_t i, uint8_t j, uint8_t t,uint8_t type) {
+    featureData( uint8_t i, uint8_t j, uint8_t t,uint8_t type) {
         data = (i << 6) | (j << 3) | (t << 1) | type;
     }
-    mapData(void) {
+    featureData(void) {
         data = 0x00;
     }
-    mapData(uint8_t casted) {
+    featureData(uint8_t casted) {
         data = casted;
     }
     uint8_t getI() {
