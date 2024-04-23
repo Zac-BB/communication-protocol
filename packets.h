@@ -181,10 +181,10 @@ struct featureData{
         data &= 0xf9;
         data |= (t << 1);
     }
-    uint8_t getWall() {
+    uint8_t getType() {
         return (data ) & 0x01;
     }
-    void setWall(uint8_t wall){
+    void setType(uint8_t wall){
         data &= 0xfe;
         data |= (wall & 0x01);
     }
