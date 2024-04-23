@@ -201,5 +201,5 @@ struct featureData{
     bool operator == (const uint8_t& comp) {
         return (data & 0xf8) == (comp & 0xf8);
     }
-}
+};
 
