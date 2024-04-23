@@ -8,5 +8,6 @@
 
 #define sendMapData "esp/map"// : nav
 // #define affirmMapData "romi/map/r"// : bool
+#define sendLocation "esp/pose"
 
 #define collisionDetected "esp/col"//:
