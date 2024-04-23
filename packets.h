@@ -145,5 +145,61 @@ struct mapData {
    
 };
 
+struct featureData{
+    //assessable via cell data lsb is for type
+    // ramp i [00] j[000] t[00] Type[~0~]
+    // button i [00] j[000] t[00] Type[~1~]
+    uint8_t data = 0x00;
+    mapData( uint8_t i, uint8_t j, uint8_t t,uint8_t type) {
+        data = (i << 6) | (j << 3) | (t << 1) | type;
+    }
+    mapData(void) {
+        data = 0x00;
+    }
+    mapData(uint8_t casted) {
+        data = casted;
+    }
+    uint8_t getI() {
 
+        return (data >> 6) & 0x03;
+    }
+    void setI(uint8_t i){
+        data &= 0x3f;
+        data |= (i << 6);
+    }
+    uint8_t getJ() {
+        return (data >> 3) & 0x07;
+    }
+    void setJ(uint8_t j){
+        data &= 0xc7;
+        data |= (j << 3);
+    }
+    uint8_t getT() {
+        return (data >> 1) & 0x03;
+    }
+    void setT(uint8_t t){
+        data &= 0xf9;
+        data |= (t << 1);
+    }
+    uint8_t getWall() {
+        return (data ) & 0x01;
+    }
+    void setWall(uint8_t wall){
+        data &= 0xfe;
+        data |= (wall & 0x01);
+    }
+    bool cordsMatch(mapData& b) {
+        return getI() == b.getI() && getJ() == b.getJ();
+    }
+    
+    operator uint8_t() {
+        return data;
+    }
+    bool operator == (const mapData& comp) {
+        return (data & 0xf8) == (comp.data & 0xf8);
+    }
+    bool operator == (const uint8_t& comp) {
+        return (data & 0xf8) == (comp & 0xf8);
+    }
+}
 

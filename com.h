@@ -10,4 +10,7 @@
 // #define affirmMapData "romi/map/r"// : bool
 #define sendLocation "esp/pose"
 
+#define sendFeature "map/feature"// : featureData
+#define broadcastMapData "map/data"// : mapData
+
 #define collisionDetected "esp/col"//:
