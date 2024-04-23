@@ -61,7 +61,7 @@ struct pose{
 struct nav {
     // priority(0000) turn(000) drive(0)
     uint8_t data;
-    static uint8_t init = 0x00;
+    const static uint8_t init = 0x00;
     nav(uint8_t dir) {
         data = dir;
     }
